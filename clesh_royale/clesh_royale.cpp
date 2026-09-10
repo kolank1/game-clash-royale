@@ -106,6 +106,127 @@ public:
         cout << "Weapon: Poison" << endl;
     }
 };
+class Character {
+protected:
+    Weapon* weapon = nullptr;
+
+public:
+    void setWeapon(Weapon* newWeapon) {
+        weapon = newWeapon;
+    }
+
+    void attack() {
+        if (weapon != nullptr)
+            weapon->attack();
+        else
+            cout << "Weapon is not selected!" << endl;
+    }
+
+    void showCurrentWeapon() {
+        if (weapon != nullptr)
+            weapon->showWeapon();
+        else
+            cout << "Weapon is not selected!" << endl;
+    }
+
+    virtual void chooseWeapon() = 0;
+    virtual void showInfo() = 0;
+
+    virtual ~Character() {}
+};
+
+class Knight : public Character {
+private:
+    Sword sword;
+    Spear spear;
+    Mace mace;
+
+public:
+    void showInfo() override {
+        cout << "Current character: Knight" << endl;
+    }
+
+    void chooseWeapon() override {
+        int choice;
+
+        cout << "1. Sword" << endl;
+        cout << "2. Spear" << endl;
+        cout << "3. Mace" << endl;
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice == 1)
+            setWeapon(&sword);
+        else if (choice == 2)
+            setWeapon(&spear);
+        else if (choice == 3)
+            setWeapon(&mace);
+        else
+            cout << "Wrong choice!" << endl;
+    }
+};
+
+class Archer : public Character {
+private:
+    Bow bow;
+    Crossbow crossbow;
+    Dagger dagger;
+
+public:
+    void showInfo() override {
+        cout << "Current character: Archer" << endl;
+    }
+
+    void chooseWeapon() override {
+        int choice;
+
+        cout << "1. Bow" << endl;
+        cout << "2. Crossbow" << endl;
+        cout << "3. Dagger" << endl;
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice == 1)
+            setWeapon(&bow);
+        else if (choice == 2)
+            setWeapon(&crossbow);
+        else if (choice == 3)
+            setWeapon(&dagger);
+        else
+            cout << "Wrong choice!" << endl;
+    }
+};
+
+class Wizard : public Character {
+private:
+    Fireball fireball;
+    Freeze freeze;
+    Poison poison;
+
+public:
+    void showInfo() override {
+        cout << "Current character: Wizard" << endl;
+    }
+
+    void chooseWeapon() override {
+        int choice;
+
+        cout << "1. Fireball" << endl;
+        cout << "2. Freeze" << endl;
+        cout << "3. Poison" << endl;
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice == 1)
+            setWeapon(&fireball);
+        else if (choice == 2)
+            setWeapon(&freeze);
+        else if (choice == 3)
+            setWeapon(&poison);
+        else
+            cout << "Wrong choice!" << endl;
+    }
+};
 int main() {
     cout << "Strategy Pattern Game" << endl;
 
