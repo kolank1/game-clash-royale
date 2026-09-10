@@ -228,8 +228,87 @@ public:
     }
 };
 int main() {
-    cout << "Strategy Pattern Game" << endl;
+    Knight knight;
+    Archer archer;
+    Wizard wizard;
+
+    Character* currentCharacter = nullptr;
+
+    int choice;
+
+    do {
+        cout << endl;
+        cout << "===== GAME MENU =====" << endl;
+        cout << "1. Select character" << endl;
+        cout << "2. Select weapon" << endl;
+        cout << "3. Attack" << endl;
+        cout << "4. Show character and weapon" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            int characterChoice;
+
+            cout << endl;
+            cout << "1. Knight" << endl;
+            cout << "2. Archer" << endl;
+            cout << "3. Wizard" << endl;
+            cout << "Choice: ";
+            cin >> characterChoice;
+
+            if (characterChoice == 1) {
+                currentCharacter = &knight;
+                cout << "Knight selected!" << endl;
+            }
+            else if (characterChoice == 2) {
+                currentCharacter = &archer;
+                cout << "Archer selected!" << endl;
+            }
+            else if (characterChoice == 3) {
+                currentCharacter = &wizard;
+                cout << "Wizard selected!" << endl;
+            }
+            else {
+                cout << "Wrong choice!" << endl;
+            }
+        }
+
+        else if (choice == 2) {
+            if (currentCharacter != nullptr) {
+                currentCharacter->chooseWeapon();
+            }
+            else {
+                cout << "First select a character!" << endl;
+            }
+        }
+
+        else if (choice == 3) {
+            if (currentCharacter != nullptr) {
+                currentCharacter->attack();
+            }
+            else {
+                cout << "Character is not selected!" << endl;
+            }
+        }
+
+        else if (choice == 4) {
+            if (currentCharacter != nullptr) {
+                currentCharacter->showInfo();
+                currentCharacter->showCurrentWeapon();
+            }
+            else {
+                cout << "Character is not selected!" << endl;
+            }
+        }
+
+        else if (choice != 0) {
+            cout << "Wrong choice!" << endl;
+        }
+
+    } while (choice != 0);
+
+    cout << "Game closed." << endl;
 
     return 0;
 }
-
